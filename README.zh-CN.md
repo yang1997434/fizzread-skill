@@ -23,7 +23,7 @@
 或通过命令行：
 
 ```bash
-claw install fizzread
+claw install fizzread-skill
 ```
 
 ### 2. 设置 API Key
