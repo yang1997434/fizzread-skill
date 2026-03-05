@@ -18,7 +18,7 @@
 
 直接对你的 OpenClaw 机器人说：
 
-> 安装这个 skill: https://github.com/yang1997434/fizzread-skill
+> 安装这个 skill: https://github.com/yang1997434/fizzread-skill 并重启 gateway 生效
 
 或通过命令行：
 

@@ -18,7 +18,7 @@ Access 8,296+ nonfiction book summaries with 1-minute audio previews, right insi
 
 Just tell your OpenClaw bot in chat:
 
-> Install this skill: https://github.com/yang1997434/fizzread-skill
+> Install this skill: https://github.com/yang1997434/fizzread-skill and restart gateway to activate
 
 Or via CLI:
 
