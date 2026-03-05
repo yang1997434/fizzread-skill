@@ -83,13 +83,15 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
    ---
    Full 10-min audio free on FizzRead App 👉 {download_url}
 
-   🎧 [1-min Audio Preview (English)]({audio_url})
+   🎧 1-min Audio Preview (English):
+   {audio_url}
    ```
 
    - If the user's language is not English, translate the `about` field to the user's language. Keep `title` and `author` in the original English.
    - If `audio_url` is null, omit the audio line entirely.
    - Always mark audio as "(English)" since all audio content is in English.
    - **Do NOT output `cover_url` as a raw URL.** The book cover will be shown automatically via Telegram's link preview of the `app_url`.
+   - Output `audio_url` as a raw URL (not as a markdown link) so the platform can send it as an inline audio player.
 
 ---
 
@@ -159,12 +161,14 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
    ---
    Full version free on FizzRead App 👉 {download_url}
 
-   🎧 [1-min Audio Preview (English)]({audio_url})
+   🎧 1-min Audio Preview (English):
+   {audio_url}
    ```
 
    - If the user's language is not English, translate the `about` field.
    - If `audio_url` is null, omit the audio line.
    - **Do NOT output `cover_url` as a raw URL.** The cover shows via Telegram link preview of `app_url`.
+   - Output `audio_url` as a raw URL (not as a markdown link) so the platform can send it as an inline audio player.
 
 ---
 
