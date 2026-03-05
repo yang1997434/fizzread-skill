@@ -76,7 +76,7 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
    ```
    Today's Pick
 
-   ![{title}]({cover_url})
+   {cover_url}
 
    {title} by {author}
 
@@ -117,11 +117,11 @@ When the user wants to search for books (e.g. "search for atomic habits", "find 
    ```
    Found {total} books for "{keyword}":
 
-   1. ![{title}]({cover_url})
+   1. {cover_url}
       {title} — {author}
       {about, first sentence only}
 
-   2. ![{title}]({cover_url})
+   2. {cover_url}
       {title} — {author}
       {about, first sentence only}
 
@@ -155,7 +155,7 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 4. Parse the JSON response. Extract fields from `data` and output:
 
    ```
-   ![{title}]({cover_url})
+   {cover_url}
 
    {title}
    Author: {author}
@@ -199,7 +199,7 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
    ```
    Top books in {category} ({count} books available):
 
-   1. ![{title}]({cover_url})
+   1. {cover_url}
       {title} — {author}
       {about, first sentence only}
 
@@ -227,6 +227,8 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
 4. **CTA (Call to Action)**: Every response that includes book data must end with a download link to the FizzRead App. Use the `download_url` from the API response.
 
 5. **Audio handling**: When `audio_url` is null for a book, simply skip the audio section — do not mention that audio is unavailable.
+
+6. **Cover image**: Always include the `cover_url` as a standalone URL on its own line before the book title. Output the raw URL directly (not as markdown image syntax) so messaging platforms like Telegram can render it as an image preview.
 
 ---
 
