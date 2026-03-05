@@ -76,6 +76,8 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
    ```
    Today's Pick
 
+   ![{title}]({cover_url})
+
    {title} by {author}
 
    {about}
@@ -115,10 +117,12 @@ When the user wants to search for books (e.g. "search for atomic habits", "find 
    ```
    Found {total} books for "{keyword}":
 
-   1. {title} — {author}
+   1. ![{title}]({cover_url})
+      {title} — {author}
       {about, first sentence only}
 
-   2. {title} — {author}
+   2. ![{title}]({cover_url})
+      {title} — {author}
       {about, first sentence only}
 
    ...
@@ -151,6 +155,8 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 4. Parse the JSON response. Extract fields from `data` and output:
 
    ```
+   ![{title}]({cover_url})
+
    {title}
    Author: {author}
 
@@ -193,7 +199,8 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
    ```
    Top books in {category} ({count} books available):
 
-   1. {title} — {author}
+   1. ![{title}]({cover_url})
+      {title} — {author}
       {about, first sentence only}
 
    ...
