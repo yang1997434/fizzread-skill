@@ -74,9 +74,9 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
 2. Parse the JSON response. All API responses wrap data in a `data` field (e.g. `{"data": {...}}`). Extract fields from `data` and output using this template:
 
    ```
-   Today's Pick
+   {app_url}
 
-   {cover_url}
+   Today's Pick
 
    {title} by {author}
 
@@ -117,12 +117,10 @@ When the user wants to search for books (e.g. "search for atomic habits", "find 
    ```
    Found {total} books for "{keyword}":
 
-   1. {cover_url}
-      {title} — {author}
+   1. [{title}]({app_url})  — {author}
       {about, first sentence only}
 
-   2. {cover_url}
-      {title} — {author}
+   2. [{title}]({app_url})  — {author}
       {about, first sentence only}
 
    ...
@@ -155,7 +153,7 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 4. Parse the JSON response. Extract fields from `data` and output:
 
    ```
-   {cover_url}
+   {app_url}
 
    {title}
    Author: {author}
@@ -199,8 +197,7 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
    ```
    Top books in {category} ({count} books available):
 
-   1. {cover_url}
-      {title} — {author}
+   1. [{title}]({app_url})  — {author}
       {about, first sentence only}
 
    ...
@@ -228,7 +225,7 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
 
 5. **Audio handling**: When `audio_url` is null for a book, simply skip the audio section — do not mention that audio is unavailable.
 
-6. **Cover image**: Always include the `cover_url` as a standalone URL on its own line before the book title. Output the raw URL directly (not as markdown image syntax) so messaging platforms like Telegram can render it as an image preview.
+6. **Cover image**: For single-book views (Daily Pick, Book Summary), place the `app_url` as the **first line** of the message — Telegram will auto-generate a link preview card with the book cover from the page's og:image. For list views (Search, Categories), use `[{title}]({app_url})` as a clickable link.
 
 ---
 
