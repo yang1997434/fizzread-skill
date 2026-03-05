@@ -80,10 +80,10 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
 
    {about}
 
-   🎧 [1-min Audio Preview (English)]({audio_url})
-
    ---
    Full 10-min audio free on FizzRead App 👉 {download_url}
+
+   🎧 [1-min Audio Preview (English)]({audio_url})
    ```
 
    - If the user's language is not English, translate the `about` field to the user's language. Keep `title` and `author` in the original English.
@@ -156,10 +156,10 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 
    {about}
 
-   🎧 [1-min Audio Preview (English)]({audio_url})
-
    ---
    Full version free on FizzRead App 👉 {download_url}
+
+   🎧 [1-min Audio Preview (English)]({audio_url})
    ```
 
    - If the user's language is not English, translate the `about` field.
