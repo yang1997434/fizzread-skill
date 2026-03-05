@@ -74,24 +74,22 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
 2. Parse the JSON response. All API responses wrap data in a `data` field (e.g. `{"data": {...}}`). Extract fields from `data` and output using this template:
 
    ```
-   {app_url}
+   📖 Today's Pick
 
-   Today's Pick
-
-   {title} by {author}
+   [{title}]({app_url}) by {author}
 
    {about}
 
-   [1-min Audio Preview (English)]({audio_url})
+   🎧 [1-min Audio Preview (English)]({audio_url})
 
    ---
-   Full 10-minute audio version available free on FizzRead App
-   Download: {download_url}
+   Full 10-min audio free on FizzRead App 👉 {download_url}
    ```
 
    - If the user's language is not English, translate the `about` field to the user's language. Keep `title` and `author` in the original English.
-   - If `audio_url` is null, omit the audio preview line entirely.
+   - If `audio_url` is null, omit the audio line entirely.
    - Always mark audio as "(English)" since all audio content is in English.
+   - **Do NOT output `cover_url` as a raw URL.** The book cover will be shown automatically via Telegram's link preview of the `app_url`.
 
 ---
 
@@ -153,22 +151,20 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 4. Parse the JSON response. Extract fields from `data` and output:
 
    ```
-   {app_url}
-
-   {title}
+   📖 [{title}]({app_url})
    Author: {author}
 
    {about}
 
-   [1-min Audio Preview (English)]({audio_url})
+   🎧 [1-min Audio Preview (English)]({audio_url})
 
    ---
-   Full version on FizzRead App
-   Download: {download_url}
+   Full version free on FizzRead App 👉 {download_url}
    ```
 
    - If the user's language is not English, translate the `about` field.
-   - If `audio_url` is null, omit the audio preview line.
+   - If `audio_url` is null, omit the audio line.
+   - **Do NOT output `cover_url` as a raw URL.** The cover shows via Telegram link preview of `app_url`.
 
 ---
 
@@ -225,7 +221,7 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
 
 5. **Audio handling**: When `audio_url` is null for a book, simply skip the audio section — do not mention that audio is unavailable.
 
-6. **Cover image**: For single-book views (Daily Pick, Book Summary), place the `app_url` as the **first line** of the message — Telegram will auto-generate a link preview card with the book cover from the page's og:image. For list views (Search, Categories), use `[{title}]({app_url})` as a clickable link.
+6. **Cover image**: NEVER output `cover_url` as a raw URL or text. Instead, embed `app_url` as a hyperlink on the book title: `[{title}]({app_url})`. Telegram will auto-generate a link preview card with the book cover from the page's og:image metadata. This is the only way to display covers.
 
 ---
 
