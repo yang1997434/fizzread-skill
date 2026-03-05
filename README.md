@@ -23,7 +23,7 @@ Just tell your OpenClaw bot in chat:
 Or via CLI:
 
 ```bash
-claw install fizzread
+claw install fizzread-skill
 ```
 
 ### 2. Set Up API Key
