@@ -82,12 +82,13 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
 
    ---
    Full 10-min audio free on FizzRead App 👉 {download_url}
+
+   🎧 [1-min Audio Preview (English)]({audio_url})
    ```
 
-   Then, if `audio_url` is not null, send the audio file at `{audio_url}` as a **separate audio message** using the platform's native audio API (e.g. Telegram `sendAudio`). Set the audio `title` to `"{title} - 1min Preview"`, `performer` to `"{author}"`, and `duration` to `{audio_duration}` seconds. Do NOT include the audio URL as a text link in the message.
-
    - If the user's language is not English, translate the `about` field to the user's language. Keep `title` and `author` in the original English.
-   - If `audio_url` is null, skip the audio step entirely.
+   - If `audio_url` is null, omit the audio line entirely.
+   - Always mark audio as "(English)" since all audio content is in English.
    - **Do NOT output `cover_url` as a raw URL.** The book cover will be shown automatically via Telegram's link preview of the `app_url`.
 
 ---
@@ -157,12 +158,12 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 
    ---
    Full version free on FizzRead App 👉 {download_url}
+
+   🎧 [1-min Audio Preview (English)]({audio_url})
    ```
 
-   Then, if `audio_url` is not null, send the audio file at `{audio_url}` as a **separate audio message** using the platform's native audio API (e.g. Telegram `sendAudio`). Set the audio `title` to `"{title} - 1min Preview"`, `performer` to `"{author}"`, and `duration` to `{audio_duration}` seconds. Do NOT include the audio URL as a text link in the message.
-
    - If the user's language is not English, translate the `about` field.
-   - If `audio_url` is null, skip the audio step entirely.
+   - If `audio_url` is null, omit the audio line.
    - **Do NOT output `cover_url` as a raw URL.** The cover shows via Telegram link preview of `app_url`.
 
 ---
@@ -220,9 +221,7 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
 
 5. **Audio handling**: When `audio_url` is null for a book, simply skip the audio section — do not mention that audio is unavailable.
 
-6. **Audio delivery**: Do NOT include `audio_url` as a text link in the message. Instead, after sending the text message, send the audio file separately using the platform's native audio message API (e.g. Telegram `sendAudio`). Set the audio title to `"{title} - 1min Preview"` and performer to `"{author}"` so users see the book name instead of the file ID.
-
-7. **Cover image**: NEVER output `cover_url` as a raw URL or text. Instead, embed `app_url` as a hyperlink on the book title: `[{title}]({app_url})`. Telegram will auto-generate a link preview card with the book cover from the page's og:image metadata. This is the only way to display covers.
+6. **Cover image**: NEVER output `cover_url` as a raw URL or text. Instead, embed `app_url` as a hyperlink on the book title: `[{title}]({app_url})`. Telegram will auto-generate a link preview card with the book cover from the page's og:image metadata. This is the only way to display covers.
 
 ---
 
