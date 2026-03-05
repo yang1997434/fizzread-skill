@@ -38,7 +38,7 @@ If `FIZZREAD_API_KEY` is **not set or empty**, do NOT call any API. Instead, sta
 2. When the user provides a key, run a connectivity test:
 
    ```bash
-   curl -s -H "Authorization: Bearer {user_provided_key}" "https://api.xiai.xyz/api/skill/v1/daily"
+   curl -s -H "Authorization: Bearer {user_provided_key}" "https://api.fizzread.ai/v1/daily"
    ```
 
    - If the response contains `data.title`, the test passed. **Remember this key for all subsequent API calls in this session.** Reply:
@@ -53,7 +53,7 @@ If `FIZZREAD_API_KEY` is **not set or empty**, do NOT call any API. Instead, sta
 
 **Important:** Once a key is provided and verified, remember it and substitute it directly into the `Authorization: Bearer` header of every subsequent `curl` command. Do not rely on shell environment variables persisting between commands.
 
-**Base URL:** `https://api.xiai.xyz/api/skill/v1`
+**Base URL:** `https://api.fizzread.ai/v1`
 
 All requests must include the header:
 ```
@@ -68,7 +68,7 @@ When the user asks for a daily book recommendation (e.g. "recommend a book", "to
 
 1. Run:
    ```bash
-   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.xiai.xyz/api/skill/v1/daily"
+   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.fizzread.ai/v1/daily"
    ```
 
 2. Parse the JSON response. All API responses wrap data in a `data` field (e.g. `{"data": {...}}`). Extract fields from `data` and output using this template:
@@ -103,7 +103,7 @@ When the user wants to search for books (e.g. "search for atomic habits", "find 
 
 3. Run:
    ```bash
-   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.xiai.xyz/api/skill/v1/search?q={encoded_keyword}&limit=5"
+   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.fizzread.ai/v1/search?q={encoded_keyword}&limit=5"
    ```
 
    If the user explicitly asks for books with audio only, append `&audio_only=true`.
@@ -145,7 +145,7 @@ When the user asks for a specific book's summary (e.g. by selecting from search 
 
 3. Run:
    ```bash
-   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.xiai.xyz/api/skill/v1/book/{slug}"
+   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.fizzread.ai/v1/book/{slug}"
    ```
 
 4. Parse the JSON response. Extract fields from `data` and output:
@@ -176,16 +176,16 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
 
 2. First, fetch available categories:
    ```bash
-   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.xiai.xyz/api/skill/v1/categories"
+   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.fizzread.ai/v1/categories"
    ```
 
-3. Fuzzy-match the user's requested topic against the returned `data.categories[].name` list. Pick the closest match. If no reasonable match exists, tell the user the available categories and ask them to pick one.
+3. Fuzzy-match the user's requested topic against the returned `data[].name` list. Pick the closest match. If no reasonable match exists, tell the user the available categories and ask them to pick one.
 
 4. **URL-encode the matched category name.**
 
 5. Fetch recommendations:
    ```bash
-   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.xiai.xyz/api/skill/v1/recommend?category={encoded_category}&limit=5"
+   curl -s -H "Authorization: Bearer $FIZZREAD_API_KEY" "https://api.fizzread.ai/v1/recommend?category={encoded_category}&limit=5"
    ```
 
 6. Output as a numbered list (same format as Book Search results):
