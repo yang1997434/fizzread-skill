@@ -1,6 +1,6 @@
 ---
 name: fizzread
-description: "Daily book summaries and 1-minute audio previews from 8,296+ nonfiction books. Search, browse categories, and listen via FizzRead."
+description: "Instant access to 100K+ nonfiction book summaries with 1-minute audio previews. Free demo key included — no signup needed. Search, browse, and listen via FizzRead."
 homepage: https://github.com/yang1997434/fizzread-skill
 emoji: "\U0001F4DA"
 metadata:
@@ -14,50 +14,72 @@ metadata:
 
 # FizzRead — AI Book Summaries & Audio Previews
 
-Access 8,296+ nonfiction book summaries with 1-minute audio previews. Get daily recommendations, search by keyword, browse categories, and listen — all inside your conversation.
+Instant access to 100K+ nonfiction book summaries with 1-minute audio previews. Free demo key included — start exploring immediately. Get daily recommendations, search by keyword, browse categories, and listen — all inside your conversation.
 
 ---
 
 ## Setup
 
-Before using any FizzRead command, check that the environment variable `FIZZREAD_API_KEY` is set.
+**Built-in Demo Key:** This skill includes a free demo API key so everyone can try it immediately — no signup required.
 
-If `FIZZREAD_API_KEY` is **not set or empty**, do NOT call any API. Instead, start the guided setup flow:
+**Demo key:** `3272ed72f9d0b120706038f94220770b`
 
-1. Prompt the user:
+### API Key Resolution Order
 
-   > FizzRead skill installed successfully! To get started, please provide your API key.
-   >
-   > How to get a key:
-   > 1. Visit [fizzread.ai](https://www.fizzread.ai) and sign up
-   > 2. Go to Settings > API Keys > Generate
-   > 3. Paste your key here
-   >
-   > Waiting for your API key...
+When making API calls, determine the API key using this priority:
 
-2. When the user provides a key, run a connectivity test:
+1. **Environment variable `FIZZREAD_API_KEY`** — if set, always use it
+2. **Demo key** (`3272ed72f9d0b120706038f94220770b`) — use as fallback when no env var is set
 
-   ```bash
-   curl -s -H "Authorization: Bearer {user_provided_key}" "https://api.fizzread.ai/v1/daily"
-   ```
+### First-time Setup Flow
 
-   - If the response contains `data.title`, the test passed. **Remember this key for all subsequent API calls in this session.** Reply:
-     > API key verified! Here's today's recommended book to confirm everything works:
-     >
-     > (show the daily pick result using the Daily Pick format below)
-     >
-     > You're all set! Try "search for atomic habits" or "recommend psychology books" to explore.
+On first use, check if `FIZZREAD_API_KEY` is set by running:
 
-   - On 401: "This API key appears to be invalid. Please double-check and try again."
-   - On network failure: "Could not connect to FizzRead API. Please check your network connection and try again."
+```bash
+echo "$FIZZREAD_API_KEY"
+```
 
-**Important:** Once a key is provided and verified, remember it and substitute it directly into the `Authorization: Bearer` header of every subsequent `curl` command. Do not rely on shell environment variables persisting between commands.
+**If set and non-empty:** Use it directly. Run a quick connectivity test with the Daily Pick endpoint and show the result.
+
+**If not set (empty):** Use the demo key and show today's book. Then append this guidance:
+
+> You're using the free demo key. For your own key with higher rate limits:
+>
+> 1. Visit [fizzread.ai](https://www.fizzread.ai) and sign up
+> 2. Go to Settings > API Keys > Generate
+> 3. Add it to your system environment to persist across sessions:
+>
+> **macOS / Linux** — add to your `~/.bashrc` or `~/.zshrc`:
+> ```bash
+> export FIZZREAD_API_KEY="your_key_here"
+> ```
+> Then run `source ~/.zshrc` (or restart terminal).
+>
+> **Windows** — run in PowerShell:
+> ```powershell
+> [System.Environment]::SetEnvironmentVariable("FIZZREAD_API_KEY", "your_key_here", "User")
+> ```
+> Then restart terminal.
+
+### When the user provides a key manually
+
+If a user pastes a key during conversation, run a connectivity test:
+
+```bash
+curl -s -H "Authorization: Bearer {user_provided_key}" "https://api.fizzread.ai/v1/daily"
+```
+
+- If the response contains `data.title`, the test passed. **Remember this key for all subsequent API calls in this session.** Also guide the user to save it as an environment variable (using the instructions above) so it persists across sessions.
+- On 401: "This API key appears to be invalid. Please double-check and try again."
+- On network failure: "Could not connect to FizzRead API. Please check your network connection and try again."
+
+**Important:** Once a key is determined (from env var, demo, or user-provided), remember it and substitute it directly into the `Authorization: Bearer` header of every subsequent `curl` command. Do not rely on shell environment variables persisting between commands.
 
 **Base URL:** `https://api.fizzread.ai/v1`
 
 All requests must include the header:
 ```
-Authorization: Bearer <the remembered API key>
+Authorization: Bearer <the resolved API key>
 ```
 
 ---
@@ -126,7 +148,7 @@ When the user wants to search for books (e.g. "search for atomic habits", "find 
    Reply with a number to see the full summary and audio preview.
 
    ---
-   Explore 8,296+ book summaries on FizzRead App
+   Explore 100K+ book summaries on FizzRead App
    Download: {download_url from first result}
    ```
 
@@ -201,7 +223,7 @@ When the user asks for books by category or topic (e.g. "recommend psychology bo
    Reply with a number to see the full summary and audio preview.
 
    ---
-   Explore 8,296+ book summaries on FizzRead App
+   Explore 100K+ book summaries on FizzRead App
    Download: {download_url from first result}
    ```
 

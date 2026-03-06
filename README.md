@@ -2,12 +2,12 @@
 
 # FizzRead — OpenClaw Skill
 
-Access 8,296+ nonfiction book summaries with 1-minute audio previews, right inside your AI agent conversations. Powered by [FizzRead](https://www.fizzread.ai).
+Instant access to 100K+ nonfiction book summaries with 1-minute audio previews, right inside your AI agent conversations. Free demo key included — no signup needed. Powered by [FizzRead](https://www.fizzread.ai).
 
 ## Features
 
 - **Daily Pick** — Get a curated book recommendation every day with summary and audio
-- **Book Search** — Search by keyword, title, or author across 8,296+ books
+- **Book Search** — Search by keyword, title, or author across 100K+ books
 - **Book Summary** — Read the full summary and listen to 1-minute audio previews
 - **Category Recommendations** — Browse books by topic (Psychology, Productivity, Business, etc.)
 - **Multi-language** — Summaries auto-translate to your language; audio stays in English
@@ -26,15 +26,25 @@ Or via CLI:
 claw install fizzread-skill
 ```
 
-### 2. Set Up API Key
+### 2. Start Using — No Setup Needed
 
-After installation, the skill will automatically prompt you to provide your API key:
+This skill includes a **free demo API key** so you can try it right away — no signup required. Just start chatting!
+
+### 3. (Optional) Use Your Own API Key
+
+For higher rate limits, get your own key and save it as a system environment variable:
 
 1. Visit [fizzread.ai](https://www.fizzread.ai) and create an account
 2. Go to **Settings > API Keys > Generate**
-3. Paste the key when prompted — the skill will auto-test and confirm it works
+3. Add to your shell profile (`~/.bashrc` or `~/.zshrc`):
 
-### 3. Start Using
+```bash
+export FIZZREAD_API_KEY="your_key_here"
+```
+
+Then restart your terminal or run `source ~/.zshrc`.
+
+### Try It
 
 Just talk to your agent:
 
@@ -84,7 +94,7 @@ Refer to the OpenClaw cron scheduling documentation for setup details.
 
 | Issue | Solution |
 |-------|----------|
-| "API key invalid" | Verify your `FIZZREAD_API_KEY` is correct. Regenerate at [fizzread.ai](https://www.fizzread.ai) if needed. |
+| "API key invalid" | The built-in demo key should work out of the box. If using your own key, verify `FIZZREAD_API_KEY` is correct. Regenerate at [fizzread.ai](https://www.fizzread.ai) if needed. |
 | "No books found" | Try different or broader search keywords. |
 | No audio in response | Not all books have audio previews. The skill automatically skips audio when unavailable. |
 | Rate limit error | Wait a moment and try again. The API allows 100 requests/minute. |

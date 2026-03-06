@@ -2,12 +2,12 @@
 
 # FizzRead — OpenClaw Skill
 
-在 AI 对话中直接获取 8,296+ 本非虚构书籍摘要和 1 分钟音频预览。由 [FizzRead](https://www.fizzread.ai) 提供支持。
+在 AI 对话中即时获取 100K+ 本非虚构书籍摘要和 1 分钟音频预览。内置免费 Demo Key，无需注册即可使用。由 [FizzRead](https://www.fizzread.ai) 提供支持。
 
 ## 功能
 
 - **每日一书** — 每天获取一本精选书籍推荐，含摘要和音频
-- **书籍搜索** — 在 8,296+ 本书中按关键词、书名或作者搜索
+- **书籍搜索** — 在 100K+ 本书中按关键词、书名或作者搜索
 - **书籍摘要** — 阅读完整摘要，收听 1 分钟音频预览
 - **分类推荐** — 按主题浏览书籍（心理学、效率、商业等）
 - **多语言** — 摘要自动翻译为你的语言；音频保持英文原版
@@ -26,15 +26,25 @@
 claw install fizzread-skill
 ```
 
-### 2. 设置 API Key
+### 2. 直接使用 — 无需配置
 
-安装后，skill 会自动提示你提供 API Key：
+本 skill 内置 **免费 Demo API Key**，安装即用，无需注册。直接开始对话！
+
+### 3.（可选）使用自己的 API Key
+
+如需更高调用频率，获取自己的 key 并设置为系统环境变量：
 
 1. 访问 [fizzread.ai](https://www.fizzread.ai) 并注册账号
 2. 进入 **设置 > API Keys > 生成**
-3. 在提示时粘贴 key — skill 会自动测试并确认是否可用
+3. 添加到 shell 配置文件（`~/.bashrc` 或 `~/.zshrc`）：
 
-### 3. 开始使用
+```bash
+export FIZZREAD_API_KEY="your_key_here"
+```
+
+然后重启终端或运行 `source ~/.zshrc`。
+
+### 试试看
 
 直接和你的 AI 对话：
 
@@ -84,7 +94,7 @@ cron: "0 8 * * *"    # 每天早上 8:00
 
 | 问题 | 解决方法 |
 |------|---------|
-| "API key 无效" | 检查 `FIZZREAD_API_KEY` 是否正确。如需要，在 [fizzread.ai](https://www.fizzread.ai) 重新生成。|
+| "API key 无效" | 内置 demo key 应该开箱即用。如使用自己的 key，检查 `FIZZREAD_API_KEY` 是否正确。如需要，在 [fizzread.ai](https://www.fizzread.ai) 重新生成。|
 | "未找到书籍" | 尝试不同或更宽泛的搜索关键词。|
 | 回复中没有音频 | 并非所有书籍都有音频预览，skill 会自动跳过无音频的书。|
 | 频率限制错误 | 稍等片刻再试。API 允许每分钟 100 次请求。|
