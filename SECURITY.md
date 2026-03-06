@@ -6,12 +6,12 @@ This skill makes HTTP requests only to the following endpoints:
 
 | Endpoint | Data Sent | Purpose |
 |----------|-----------|---------|
-| `api.xiai.xyz/api/skill/v1/*` | API Key (Authorization header), search keywords, category names, book slugs | Fetch book data (daily pick, search, summaries, recommendations) |
+| `skill.fizzread.ai/v1/*` | API Key (Authorization header), search keywords, category names, book slugs | Fetch book data (daily pick, search, summaries, recommendations) |
 | `nccgpub.blob.core.windows.net` | None (read-only CDN) | Serve audio files (.mp3) and cover images (.webp) |
 
 ## Data Flow
 
-1. The user's `FIZZREAD_API_KEY` is sent as a Bearer token in the Authorization header to `api.xiai.xyz` only.
+1. The user's `FIZZREAD_API_KEY` is sent as a Bearer token in the Authorization header to `skill.fizzread.ai` only.
 2. Search queries and category names entered by the user are sent as URL query parameters.
 3. Audio and cover image URLs returned by the API point to a CDN (`nccgpub.blob.core.windows.net`). No user data is sent to the CDN.
 
